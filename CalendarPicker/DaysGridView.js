@@ -33,7 +33,8 @@ export default function DaysGridView(props) {
     maxRangeDuration,
     enableDateChange,
     displayDot,
-    dotStyle
+    dotStyle,
+    markDates
   } = props;
   const today = moment();
   // let's get the total of days in this month, we need the year as well, since
@@ -91,6 +92,7 @@ export default function DaysGridView(props) {
                 enableDateChange={enableDateChange}
                 displayDot={displayDot}
                 dotStyle={dotStyle}
+                markDates={markDates}
               />
             );
           }
@@ -126,6 +128,7 @@ export default function DaysGridView(props) {
               enableDateChange={enableDateChange}
               displayDot={displayDot}
               dotStyle={dotStyle}
+              markDates={markDates}
             />
           );
         }

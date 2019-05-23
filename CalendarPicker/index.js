@@ -265,7 +265,8 @@ export default class CalendarPicker extends Component {
       displayDot,
       dotStyle,
       mainStyle,
-      headerIconStyle
+      headerIconStyle,
+      markDates
     } = this.props;
 
     let disabledDatesTime = [];
@@ -312,7 +313,6 @@ export default class CalendarPicker extends Component {
         maxRangeDurationTime = maxRangeDuration;
       }
     }
-
     return (
       <Swiper
         onSwipe={direction => this.props.enableSwipe && this.onSwipe(direction)}
@@ -366,6 +366,7 @@ export default class CalendarPicker extends Component {
             customDatesStyles={customDatesStyles}
             displayDot={displayDot}
             dotStyle={dotStyle}
+            markDates={markDates}
           />
         </View>
       </Swiper>

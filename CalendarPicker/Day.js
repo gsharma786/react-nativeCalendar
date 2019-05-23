@@ -4,6 +4,21 @@ import PropTypes from "prop-types";
 import { Utils } from "./Utils";
 import moment from "moment";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
+
+const monthArr = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec"
+];
 export default function Day(props) {
   const {
     day,
@@ -28,7 +43,8 @@ export default function Day(props) {
     maxRangeDuration,
     enableDateChange,
     displayDot,
-    dotStyle
+    dotStyle,
+    markDates
   } = props;
 
   const thisDay = moment({ year, month, day });
@@ -158,7 +174,6 @@ export default function Day(props) {
         styles.selectedDayLabel,
         isToday && todayTextStyle
       ];
-      console.log(isToday, "isToday");
       // selectedDayStyle prop overrides selectedDayColor (created via makeStyles)
       if (isToday) {
         propSelectedDayStyle = selectedDayStyle || styles.selectedToday;
@@ -221,7 +236,17 @@ export default function Day(props) {
         selectedDayColorStyle = styles.selectedDayLabel;
       }
     }
-    console.log(this.props, "log data=>>");
+    const calendarDate = `${day}-${monthArr[month]}-${year}`;
+    let displayAppointmentDot = false;
+
+    if (markDates && markDates.length > 0) {
+      markDates.map((date, index) => {
+        if (date === calendarDate) {
+          displayAppointmentDot = true;
+        }
+      });
+    }
+
     return (
       <View style={[styles.dayWrapper, customContainerStyle]}>
         <TouchableOpacity
@@ -240,7 +265,7 @@ export default function Day(props) {
             {day}
           </Text>
         </TouchableOpacity>
-        {displayDot && (
+        {displayDot && displayAppointmentDot && (
           <MaterialIcon
             name="brightness-1"
             size={5}
