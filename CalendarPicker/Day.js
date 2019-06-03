@@ -46,10 +46,8 @@ export default function Day(props) {
     dotStyle,
     markDates
   } = props;
-
   const thisDay = moment({ year, month, day });
   const today = moment();
-
   let dateOutOfRange;
   let daySelectedStyle = styles.dayButton; // may be overridden depending on state
   let selectedDayColorStyle = {};
@@ -236,10 +234,12 @@ export default function Day(props) {
         selectedDayColorStyle = styles.selectedDayLabel;
       }
     }
-    const calendarDate = `${day}-${monthArr[month]}-${year}`;
+    const calendarDate = `${day < 10 ? `0${day}` : day}-${
+      monthArr[month]
+    }-${year}`;
     let displayAppointmentDot = false;
-
     if (markDates && markDates.length > 0) {
+      debugger;
       markDates.map((date, index) => {
         if (date === calendarDate) {
           displayAppointmentDot = true;
